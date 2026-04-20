@@ -3,54 +3,52 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Clatter — a typewriter in your browser</title>
+<title>The Clatter</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #c9a55a;
+    --bg: #6b0f1f;
+    --bg-deep: #4a0a14;
     --paper: #f4ebd6;
     --paper-shadow: #d9ccac;
     --ink: #1a1512;
-    --ink-soft: #3a2f26;
+    --ink-soft: rgba(255, 244, 232, 0.78);
+    --heading: #fff5eb;
     --ribbon-red: #8a2a1f;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
     font-family: "Cormorant Garamond", Georgia, serif;
-    color: var(--ink);
+    color: var(--heading);
     background: var(--bg);
     background-image:
-      radial-gradient(ellipse 120% 80% at 50% 20%, rgba(255,220,150,.25), transparent 60%),
-      radial-gradient(ellipse 100% 60% at 50% 110%, rgba(60,40,10,.35), transparent 70%),
-      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0.4  0 0 0 0 0.3  0 0 0 0 0.15  0 0 0 .08 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");
+      radial-gradient(ellipse 90% 70% at 50% -10%, rgba(255, 180, 190, 0.18), transparent 55%),
+      radial-gradient(ellipse 80% 50% at 50% 120%, rgba(0, 0, 0, 0.22), transparent 55%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
     min-height: 100vh;
     overflow-x: hidden;
   }
 
-  .scene { position: relative; max-width: 1180px; margin: 0 auto; padding: 24px 32px 80px; }
+  .scene { position: relative; max-width: 1180px; margin: 0 auto; padding: 28px 32px 80px; }
 
-  .brand { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; margin-bottom: 14px; }
-  .brand-mark { font-family: "Cormorant Garamond", serif; font-style: italic; font-weight: 500; font-size: 28px; }
-  .brand-mark b { font-style: normal; font-weight: 600; }
-  .brand-nav { display: flex; gap: 22px; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--ink-soft); }
-  .brand-nav a { color: inherit; text-decoration: none; opacity: .7; }
-  .brand-nav a:hover { opacity: 1; }
-
-  .hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: end; margin-bottom: 18px; }
-  .hero h1 { font-family: "Cormorant Garamond", serif; font-weight: 500; font-size: clamp(40px, 5.2vw, 78px); line-height: .95; letter-spacing: -.02em; margin: 0 0 10px; }
-  .hero h1 em { font-style: italic; font-weight: 400; display: block; padding-left: 1.2em; }
-  .hero-sub { font-family: "Special Elite", "Courier New", monospace; font-size: 14px; line-height: 1.7; max-width: 42ch; opacity: .88; }
-  .hero-meta { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: .28em; text-transform: uppercase; opacity: .55; margin-bottom: 8px; }
-  .hero-right { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; padding-bottom: 12px; }
-  .rule { width: 100%; height: 1px; background: var(--ink); opacity: .35; margin: 12px 0 20px; }
+  .page-title {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 600;
+    font-size: clamp(26px, 3.2vw, 36px);
+    letter-spacing: 0.02em;
+    color: var(--heading);
+    text-align: center;
+    margin: 0 0 28px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  }
 
   /* Stage holds paper + typewriter image */
   .stage {
     position: relative;
-    margin: 0 auto;
+    margin: 360px auto 0;
     width: min(760px, 100%);
     isolation: isolate;
   }
@@ -62,7 +60,7 @@
     left: 50%;
     top: -340px;
     transform: translateX(-50%);
-    width: 38%;
+    width: min(92%, 708px);
     z-index: 1;
     filter: drop-shadow(0 16px 24px rgba(30,20,5,.35));
     pointer-events: none;
@@ -226,23 +224,24 @@
   .kbd {
     display: inline-block;
     padding: 3px 7px 4px;
-    border: 1px solid rgba(26,21,18,.4);
+    border: 1px solid rgba(255, 245, 235, 0.45);
     border-radius: 3px;
-    background: rgba(255,245,215,.25);
+    background: rgba(0, 0, 0, 0.2);
     font-family: "JetBrains Mono", monospace;
     font-size: 9px;
     line-height: 1;
+    color: var(--heading);
   }
   .ctrl-btn {
-    appearance: none; border: 1px solid rgba(26,21,18,.5);
-    background: transparent;
+    appearance: none; border: 1px solid rgba(255, 245, 235, 0.55);
+    background: rgba(0, 0, 0, 0.15);
     font: inherit; text-transform: inherit; letter-spacing: inherit;
-    color: var(--ink);
+    color: var(--heading);
     padding: 8px 12px; cursor: pointer; border-radius: 2px;
   }
-  .ctrl-btn:hover, .ctrl-btn.on { background: var(--ink); color: var(--paper); }
+  .ctrl-btn:hover, .ctrl-btn.on { background: var(--heading); color: var(--bg-deep); border-color: var(--heading); }
 
-  .stat { display: flex; flex-direction: column; align-items: center; color: var(--ink); opacity: .9; }
+  .stat { display: flex; flex-direction: column; align-items: center; color: var(--heading); opacity: .95; }
   .stat b { font-size: 28px; font-weight: 500; font-family: "Special Elite", monospace; letter-spacing: 0; }
 
   /* Tweaks panel */
@@ -268,7 +267,45 @@
 
   body[data-ribbon="red"] .sheet-inner .ch.red { color: var(--ribbon-red); }
 
-  footer { margin-top: 32px; text-align: center; font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: .25em; text-transform: uppercase; opacity: .55; }
+  .share-toast {
+    position: fixed; left: 50%; bottom: 88px; transform: translateX(-50%);
+    font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+    background: var(--heading); color: var(--bg-deep); padding: 10px 18px; border-radius: 2px;
+    opacity: 0; pointer-events: none; z-index: 120; transition: opacity .35s;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+  .share-toast.show { opacity: 1; }
+
+  /* Shared note view: paper only */
+  body.read-only-note .page-title,
+  body.read-only-note .machine,
+  body.read-only-note .controls,
+  body.read-only-note .tweaks,
+  body.read-only-note #hint,
+  body.read-only-note #catcher { display: none !important; }
+
+  body.read-only-note .scene { padding: 48px 24px 80px; max-width: 900px; }
+  body.read-only-note .stage {
+    width: min(720px, 100%);
+    margin-top: 0;
+    min-height: 60vh;
+  }
+  body.read-only-note .paper-wrap {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    pointer-events: auto;
+  }
+  body.read-only-note .paper {
+    height: min(70vh, 560px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+  body.read-only-note .cursor { display: none !important; }
+  body.read-only-note { cursor: default; }
 
   #catcher { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 
@@ -282,38 +319,16 @@
   .hint.show { opacity: 1; }
 
   @media (max-width: 720px) {
-    .hero { grid-template-columns: 1fr; gap: 12px; }
-    .hero-right { align-items: flex-start; }
-    .brand-nav { display: none; }
-    .scene { padding: 28px 18px 120px; }
+    .scene { padding: 24px 18px 100px; }
+    .stage { margin-top: 320px; }
+    .paper-wrap { width: min(94%, 100%); top: -300px; }
   }
 </style>
 </head>
-<body data-ribbon="black" data-cc-id="cc-1" style="cursor: crosshair; background-color: rgb(67, 9, 9);">
+<body data-ribbon="black" data-cc-id="cc-1" style="cursor: crosshair;">
 
 <div class="scene">
-  <header class="brand">
-    <div class="brand-mark">the <b>Clatter</b></div>
-    <nav class="brand-nav">
-      <a href="#">typewriter</a>
-      <a href="#">paper</a>
-      <a href="#">sound</a>
-      <a href="#">about</a>
-    </nav>
-  </header>
-
-  <section class="hero">
-    <div>
-      <div class="hero-meta">Est. MCMXXIV · a writing machine for the browser</div>
-      <h1>write<em>like it&nbsp;matters.</em></h1>
-    </div>
-    <div class="hero-right">
-      <div class="hero-meta">start typing →</div>
-      <p class="hero-sub">a keyboard that clacks back. a page that advances. a bell that tells you when to breathe. no autocomplete, no spellcheck, no undo — just you and the carriage and the honest weight of every key.</p>
-    </div>
-  </section>
-
-  <div class="rule"></div>
+  <h1 class="page-title" id="pageTitle">The Clatter</h1>
 
   <div class="stage" id="stage">
     <div class="paper-wrap">
@@ -361,18 +376,18 @@
       <span>words typed</span>
     </div>
     <div class="col end">
+      <button class="ctrl-btn" id="shareBtn" type="button">share note</button>
       <button class="ctrl-btn" id="soundBtn">♪ sound: on</button>
       <button class="ctrl-btn" id="tweakBtn">tweaks</button>
     </div>
   </div>
-
-  <footer>made with ink &amp; javascript · press <span class="kbd">Return</span> for new line</footer>
 </div>
 
 <input id="catcher" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
 <div class="hint" id="hint">click the typewriter, then type</div>
+<div class="share-toast" id="shareToast" role="status" aria-live="polite">link copied</div>
 
-<div class="tweaks open" id="tweaks">
+<div class="tweaks" id="tweaks">
   <h4>Tweaks <span>v2</span></h4>
   <div class="tweak-row">
     <label>paper tone <span id="paperVal">cream</span></label>
@@ -694,6 +709,13 @@ function playBackspace() {
 /* =====================================================
    TYPE ENGINE
    ===================================================== */
+function utf8ToB64(str) {
+  return btoa(unescape(encodeURIComponent(str)));
+}
+function b64ToUtf8(str) {
+  return decodeURIComponent(escape(atob(str)));
+}
+
 const sheet = document.getElementById('sheet');
 const cursor = document.getElementById('cursor');
 const machine = document.getElementById('machine');
@@ -702,6 +724,18 @@ const bellInd = document.getElementById('bellInd');
 const wcEl = document.getElementById('wc');
 
 let text = "";
+let readOnlyNote = false;
+(function initSharedNoteFromUrl() {
+  const raw = new URLSearchParams(window.location.search || '').get('n');
+  if (!raw) return;
+  try {
+    text = b64ToUtf8(raw);
+    readOnlyNote = true;
+    document.body.classList.add('read-only-note');
+    document.title = 'A note for you';
+  } catch (_) { /* invalid share payload */ }
+})();
+
 let columnInLine = 0;
 let hasBelledThisLine = false;
 const LINE_PX = 24;
@@ -724,7 +758,7 @@ function renderSheet() {
   }
   sheet.innerHTML = '';
   sheet.appendChild(frag);
-  sheet.appendChild(cursor);
+  if (!readOnlyNote) sheet.appendChild(cursor);
   const words = text.trim().length ? text.trim().split(/\s+/).length : 0;
   wcEl.textContent = words;
 }
@@ -811,6 +845,7 @@ function handleChar(ch) {
    ===================================================== */
 const ACCEPT = /^[A-Za-z0-9.,;:'"!?()\-–—&@#$%/*+=<>\[\]{}]$/;
 window.addEventListener('keydown', (e) => {
+  if (readOnlyNote) return;
   if (e.target.tagName === 'INPUT' && e.target.id !== 'catcher') return;
   ensureAudio();
   if (e.key === 'Backspace') { e.preventDefault(); doBackspace(); return; }
@@ -823,11 +858,13 @@ window.addEventListener('keydown', (e) => {
   }
 });
 document.getElementById('stage').addEventListener('click', () => {
+  if (readOnlyNote) return;
   ensureAudio();
   document.getElementById('catcher').focus();
   hintEl.classList.remove('show');
 });
 document.getElementById('catcher').addEventListener('input', (e) => {
+  if (readOnlyNote) return;
   const v = e.target.value;
   if (!v) return;
   for (const c of v) {
@@ -841,11 +878,32 @@ document.getElementById('catcher').addEventListener('input', (e) => {
 /* Hint */
 const hintEl = document.getElementById('hint');
 setTimeout(() => {
+  if (readOnlyNote) return;
   hintEl.classList.add('show');
   setTimeout(() => hintEl.classList.remove('show'), 2800);
 }, 900);
 
 /* Controls */
+const shareBtn = document.getElementById('shareBtn');
+const shareToast = document.getElementById('shareToast');
+shareBtn.addEventListener('click', async () => {
+  const u = new URL(window.location.href);
+  u.search = '';
+  u.hash = '';
+  u.searchParams.set('n', utf8ToB64(text));
+  const link = u.toString();
+  try {
+    await navigator.clipboard.writeText(link);
+    shareToast.textContent = 'link copied';
+    shareToast.classList.add('show');
+    setTimeout(() => shareToast.classList.remove('show'), 2400);
+  } catch {
+    shareToast.textContent = 'copy from dialog';
+    window.prompt('Copy link to your note:', link);
+    shareToast.classList.remove('show');
+  }
+});
+
 const soundBtn = document.getElementById('soundBtn');
 soundBtn.addEventListener('click', () => {
   state.soundOn = !state.soundOn;
@@ -924,7 +982,7 @@ function autoSeed() {
 const markUser = () => { userInteracted = true; };
 window.addEventListener('keydown', markUser, { once: true });
 window.addEventListener('pointerdown', markUser, { once: true });
-setTimeout(() => { if (!userInteracted) autoSeed(); }, 1400);
+setTimeout(() => { if (!userInteracted && !readOnlyNote) autoSeed(); }, 1400);
 </script>
 
 
